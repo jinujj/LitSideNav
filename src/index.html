@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <h1> <%= htmlWebpackPlugin.options.myPageHeader %> </h1>
+	<div>
+		Click Me 
+		<span style="font-size:30px;cursor:pointer" > &#9776;</span>
+	</div>
+
+	<!-- Added below my custom side navigation lit module-->
+	<side-nav ></side-nav>
+
+	<script>
+		const sideNavOpen = document.querySelector(`span`);
+		const sideNav = document.querySelector(`side-nav`);
+		sideNav.navigation = [`About`,`Services`, `Clients`, `Contact` ];
+		sideNavOpen.addEventListener(`click`,(e) => {
+			sideNav.dispatchEvent(new CustomEvent(`side-nav-toggle`, {
+				detail: { click: `CLICK` },
+				bubbles: true
+			}));			
+		});
+	</script>
+  </body>
+  
+</html>

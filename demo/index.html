@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Lit Side Navigation</title>
+  </head>
+  <body>
+    <h1> Lit Side Navigation </h1>
+	<div>
+		Click Me 
+		<span style="font-size:30px;cursor:pointer" > &#9776;</span>
+	</div>
+
+	<!-- Added below my custom side navigation lit module-->
+	<side-nav ></side-nav>
+
+	<script>
+		const sideNavOpen = document.querySelector(`span`);
+		const sideNav = document.querySelector(`side-nav`);
+		sideNav.navigation = [`About`,`Services`, `Clients`, `Contact` ];
+		sideNavOpen.addEventListener(`click`,(e) => {
+			sideNav.dispatchEvent(new CustomEvent(`side-nav-toggle`, {
+				detail: { click: `CLICK` },
+				bubbles: true
+			}));			
+		});
+	</script>
+  <script type="text/javascript" src="../dist/index_bundle.js?e50aa98265ef23ce5cb3"></script></body>
+  
+</html>
