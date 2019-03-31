@@ -2,23 +2,49 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+	<title><%= htmlWebpackPlugin.options.title %></title>
+	<style>
+		.main {
+			text-align: center;
+			position: fixed;
+			top: 40%;
+			left: 45%;
+		}
+		.selection {
+			display: flex;
+            flex-direction: row;
+			justify-content: space-around;
+			padding: 15px;
+		}
+	</style>
   </head>
   <body>
-    <h1> <%= htmlWebpackPlugin.options.myPageHeader %> </h1>
-	<div>
-		Click Me 
-		<span style="font-size:30px;cursor:pointer" > &#9776;</span>
-	</div>
+		<div class="main"> 
+			<h1> <%= htmlWebpackPlugin.options.myPageHeader %> </h1>
+			<div>
+				Select Orientation from which Navigation should open
+				<span class="selection">
+					<input type="radio" name="orientation" value="right" checked>Right</input>
+					<input type="radio" name="orientation" value="left" >Left</input>
+					<input type="radio" name="orientation" value="top" >Top</input>
+					<input type="radio" name="orientation" value="bottom" >Bottom</input>
+				</span>
+			</div>
+			<span id="clickme" style="font-size:20px;cursor:pointer" > Click Me  &#9776; </span>
+
+		</div>
+
 
 	<!-- Added below my custom side navigation lit module-->
 	<side-nav ></side-nav>
 
 	<script>
-		const sideNavOpen = document.querySelector(`span`);
+		const sideNavOpen = document.querySelector(`#clickme`);
 		const sideNav = document.querySelector(`side-nav`);
 		sideNav.navigation = [`About`,`Services`, `Clients`, `Contact` ];
+		
 		sideNavOpen.addEventListener(`click`,(e) => {
+			sideNav.direction = document.querySelector('input[name="orientation"]:checked').value;
 			sideNav.dispatchEvent(new CustomEvent(`side-nav-toggle`, {
 				detail: { click: `CLICK` },
 				bubbles: true
